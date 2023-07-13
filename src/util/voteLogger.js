@@ -7,7 +7,7 @@ const app = express();
 
 const webhook = new Topgg.Webhook("VRDD3aeraT4Q7Sn5U3S_zPq6nHepxwfyRZkLqRD")
 
-module.exports = async function startAPI () {
+async function startAPI () {
     app.post('/dblwebhook', webhook.listener(async (vote) => {
     console.log(vote)
     
@@ -50,3 +50,4 @@ module.exports = async function startAPI () {
     app.listen(65535);
     
 }
+startAPI()

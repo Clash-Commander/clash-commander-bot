@@ -1,5 +1,5 @@
 const { Application } = require("interactions.js");
-const API = require("./util/voteLogger")
+require("./util/voteLogger")
 require('dotenv').config()
 
 /* Misc */
@@ -19,6 +19,5 @@ const clashComponents = async () => {
   require('./util/clashClient')(client);
   }
 
-API.startAPI()
 
 clashComponents();
