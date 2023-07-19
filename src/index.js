@@ -1,6 +1,6 @@
 const { Application } = require("interactions.js");
-require("./util/voteLogger")
-require('dotenv').config()
+require("./util/voteLogger");
+require("dotenv").config();
 
 /* Misc */
 console.clear();
@@ -13,11 +13,10 @@ const client = new Application({
   port: 8221,
 });
 
-client.on("debug", debug => console.log(debug));
+client.on("debug", (debug) => console.log(debug));
 
 const clashComponents = async () => {
-  require('./util/clashClient')(client);
-  }
-
+  require("./util/clashClient")(client);
+};
 
 clashComponents();
