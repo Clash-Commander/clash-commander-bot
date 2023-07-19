@@ -19,7 +19,7 @@ module.exports = {
     },
   ],
 
-  async execute(interaction, client) {
+  async execute(interaction) {
     async function color(imagePath) {
 
       const canvasObject = canvas.createCanvas(640, 640);

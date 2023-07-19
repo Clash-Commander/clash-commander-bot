@@ -18,7 +18,7 @@ const {
       },
     ],
   
-    async execute(interaction, client) {
+    async execute(interaction) {
         let clashembed = new Embed()
         let string = interaction.options.getStringOption("tag").value;
         if (string.startsWith("#")) {

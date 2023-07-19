@@ -4,7 +4,6 @@ const {
     ButtonStyles,
     ActionRow
   } = require("interactions.js");
-  const axios = require("axios");
   require("dotenv").config()
   
   module.exports = {
@@ -12,7 +11,7 @@ const {
       description: "The help command",
   
   
-      async execute(interaction, client) {
+      async execute(interaction) {
   
   
           const button = new ActionRow()

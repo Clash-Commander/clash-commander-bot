@@ -7,7 +7,7 @@ module.exports = {
         description: "Display info about the gold pass",
 
 
-    async execute(interaction, client) {
+    async execute(interaction) {
 
         function convertToIso(dateString) {
             // Split the date string into separate parts

@@ -3,7 +3,7 @@ module.exports = {
     description: "Lets you invite the bot",
 
 
-    async execute(interaction, client) {
+    async execute(interaction) {
 
             interaction.editReply({
                content: "# Invite *Clash Commander* to you discord server \n> https://discord.com/application-directory/1057995097167368222",
