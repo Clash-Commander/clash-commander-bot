@@ -19,6 +19,7 @@ module.exports = async (client) => {
     client.setAppCommands(commands)
       .catch(console.log);
 
+      // eslint-disable-next-line no-inner-declarations
       async function postStats() {
       try {
           let servercount = null;
