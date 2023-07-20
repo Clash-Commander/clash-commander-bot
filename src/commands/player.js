@@ -39,60 +39,48 @@ module.exports = {
           let emoji = "<:unranked:1058111843874390026>";
           console.log(cocdata.bestVersusTrophies);
 
-          if (!cocdata?.league?.name) {
-            emoji = "<:unranked:1058111843874390026>";
-          }
-          if (
-            cocdata?.league?.name == "Bronze League III" ||
-            cocdata?.league?.name == "Bronze League II" ||
-            cocdata?.league?.name == "Bronze League I"
-          ) {
-            emoji = "<:bronze:1058111836555317379>";
-          }
-          if (
-            cocdata?.league?.name == "Silver League III" ||
-            cocdata?.league?.name == "Silver League II" ||
-            cocdata?.league?.name == "Silver League I"
-          ) {
-            emoji = "<:silver:1058111846248370206>";
-          }
-          if (
-            cocdata?.league?.name == "Gold League III" ||
-            cocdata?.league?.name == "Gold League II" ||
-            cocdata?.league?.name == "Gold League I"
-          ) {
-            emoji = "<:gold:1058111841336819773>";
-          }
-          if (
-            cocdata?.league?.name == "Crystal League III" ||
-            cocdata?.league?.name == "Crystal League II" ||
-            cocdata?.league?.name == "Crystal League I"
-          ) {
-            emoji = "<:crystal:1058111833485094972>";
-          }
-          if (
-            cocdata?.league?.name == "Master League III" ||
-            cocdata?.league?.name == "Master League II" ||
-            cocdata?.league?.name == "Master League I"
-          ) {
-            emoji = "<:master:1058111848697827429>";
-          }
-          if (
-            cocdata?.league?.name == "Champions League III" ||
-            cocdata?.league?.name == "Champions League II" ||
-            cocdata?.league?.name == "Champions League I"
-          ) {
-            emoji = "<:champion:1058111852166529105>";
-          }
-          if (
-            cocdata?.league?.name == "Titan League III" ||
-            cocdata?.league?.name == "Titan League II" ||
-            cocdata?.league?.name == "Titan League I"
-          ) {
-            emoji = "<:titan:1058112109172502528>";
-          }
-          if (cocdata?.league?.name == "Legend League") {
-            emoji = "<:legend:1058111839071899759>";
+          switch (cocdata?.league?.name) {
+            case "Bronze League III":
+            case "Bronze League II":
+            case "Bronze League I":
+              emoji = "<:bronze:1058111836555317379>";
+              break;
+            case "Silver League III":
+            case "Silver League II":
+            case "Silver League I":
+              emoji = "<:silver:1058111846248370206>";
+              break;
+            case "Gold League III":
+            case "Gold League II":
+            case "Gold League I":
+              emoji = "<:gold:1058111841336819773>";
+              break;
+            case "Crystal League III":
+            case "Crystal League II":
+            case "Crystal League I":
+              emoji = "<:crystal:1058111833485094972>";
+              break;
+            case "Master League III":
+            case "Master League II":
+            case "Master League I":
+              emoji = "<:master:1058111848697827429>";
+              break;
+            case "Champions League III":
+            case "Champions League II":
+            case "Champions League I":
+              emoji = "<:champion:1058111852166529105>";
+              break;
+            case "Titan League III":
+            case "Titan League II":
+            case "Titan League I":
+              emoji = "<:titan:1058112109172502528>";
+              break;
+            case "Legend League":
+              emoji = "<:legend:1058111839071899759>";
+              break;
+            default:
+              emoji = "<:unranked:1058111843874390026>";
+              break;
           }
           console.log(`https://www.clashofstats.com/players/${string}/summary`);
           clashembed
