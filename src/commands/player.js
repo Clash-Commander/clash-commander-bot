@@ -40,39 +40,25 @@ module.exports = {
           console.log(cocdata.bestVersusTrophies);
 
           switch (cocdata?.league?.name) {
-            case "Bronze League III":
-            case "Bronze League II":
-            case "Bronze League I":
+            case "Bronze League III" || "Bronze League II" || "Bronze League I":
               emoji = "<:bronze:1058111836555317379>";
               break;
-            case "Silver League III":
-            case "Silver League II":
-            case "Silver League I":
+            case "Silver League III" || "Silver League II" || "Silver League I":
               emoji = "<:silver:1058111846248370206>";
               break;
-            case "Gold League III":
-            case "Gold League II":
-            case "Gold League I":
+            case "Gold League III" || "Gold League II" || "Gold League I":
               emoji = "<:gold:1058111841336819773>";
               break;
-            case "Crystal League III":
-            case "Crystal League II":
-            case "Crystal League I":
+            case "Crystal League III" || "Crystal League II" || "Crystal League I":
               emoji = "<:crystal:1058111833485094972>";
               break;
-            case "Master League III":
-            case "Master League II":
-            case "Master League I":
+            case "Master League III" || "Master League II" || "Master League I":
               emoji = "<:master:1058111848697827429>";
               break;
-            case "Champions League III":
-            case "Champions League II":
-            case "Champions League I":
+            case "Champions League III" || "Champions League II" || "Champions League I":
               emoji = "<:champion:1058111852166529105>";
               break;
-            case "Titan League III":
-            case "Titan League II":
-            case "Titan League I":
+            case "Titan League III" || "Titan League II" || "Titan League I":
               emoji = "<:titan:1058112109172502528>";
               break;
             case "Legend League":
