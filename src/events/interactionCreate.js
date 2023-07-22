@@ -1,5 +1,5 @@
 module.exports = async (client, interaction) => {
-  interaction.deferReply()
+  interaction.deferReply();
   if (!interaction.isCommand()) return;
   const command = client.commands.get(interaction.commandName);
   if (!command) return;
@@ -8,7 +8,7 @@ module.exports = async (client, interaction) => {
   } catch (err) {
     if (err) console.error(err);
     return interaction.editReply({
-      content: 'An error occurred while executing that command.',
+      content: "An error occurred while executing that command.",
       ephemeral: true,
     });
   }
