@@ -1,22 +1,25 @@
 const { Application } = require("interactions.js");
-require("./util/voteLogger");
+const axios = require("axios");
+const config = require("./config");
 require("dotenv").config();
 
-/* Misc */
+//* Misc
 console.clear();
+console.log("─────────────────────────────────────────────────────────────────────────────────────────");
 
-/* Initialize client */
+//* Initialize client
 const client = new Application({
-  botToken: process.env.TOKEN,
-  publicKey: process.env.PUBLICKEY,
-  applicationId: process.env.APPLICATIONID,
-  port: 8221,
+	botToken: process.env.BOT_TOKEN,
+	publicKey: process.env.BOT_PUBLIC_KEY,
+	applicationId: process.env.APPLICATION_ID,
+	port: config.apiPorts.applicationPort,
 });
 
+const fetchUserAvatar = () => { return axios.get(`${config.links.japiRestAPI}/user/${process.env.APPLICATION_ID}`).then((res) => res.data.data.avatarURL).catch(() => { }); };
+fetchUserAvatar().then((avatarURL) => { if (avatarURL) { client.avatarURL = avatarURL; } });
+
+client.config = config;
 client.on("debug", (debug) => console.log(debug));
 
-const clashComponents = async () => {
-  require("./util/clashClient")(client);
-};
-
-clashComponents();
+if (client.config.basicInformation.currentMode.toLowerCase() === "production") require("./util/voteLogger")(client);
+require("./util/clashClient")(client);
