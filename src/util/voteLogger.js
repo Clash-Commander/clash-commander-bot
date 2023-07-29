@@ -1,58 +1,55 @@
-const Topgg = require("@top-gg/sdk");
+const TopGG = require("@top-gg/sdk");
 const express = require("express");
 const axios = require("axios");
-require("dotenv").config();
 
-const app = express();
+module.exports = async (client) => {
+	const app = express();
+	const webhook = new TopGG.Webhook(process.env.WEBHOOK_TOKEN);
 
-const webhook = new Topgg.Webhook("VRDD3aeraT4Q7Sn5U3S_zPq6nHepxwfyRZkLqRD");
+	async function startAPI() {
+		app.post("/dblwebhook", webhook.listener(async (vote) => {
+			console.log(vote);
 
-async function startAPI() {
-  app.post(
-    "/dblwebhook",
-    webhook.listener(async (vote) => {
-      console.log(vote);
+			let userData = null;
+			await axios({
+				method: "GET",
+				url: `${client.config.links.japiRestAPI}/user/${vote.user}`,
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+			}).then((res) => {
+				userData = res.data.data;
+			}).catch((err) => {
+				console.log(err);
+			});
 
-      let userdata = null;
-      await axios({
-        method: "get",
-        url: `https://japi.rest/discord/v1/user/${vote.user}`,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
-        .then((res) => {
-          userdata = res.data.data;
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+			await axios({
+				method: "POST",
+				url: `${process.env.WEBHOOK_VOTE}`,
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json",
+				},
+				data: {
+					embeds: [
+						{
+							title: `${userData.username} voted for us`,
+							description: `Thanks <@${vote.user}> for [voting for Clash Commander on Top.gg](${client.config.links.voteLink})\n\n[Vote Now!](${client.config.links.voteLink})\n\nVoting only takes 30 seconds and helps us keep making updates to Clash Commander!`,
+							color: client.config.colours.main
+						},
+					],
+					avatar_url: userData.avatarURL || null,
+					username: `${userData.username}`,
+				},
+			}).then((data) => {
+				return data;
+			});
+		}));
 
-      await axios({
-        method: "post",
-        url: `${process.env.WEBHOOKVOTE}`,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        data: {
-          embeds: [
-            {
-              title: `${userdata.tag} voted for us`,
-              description: `Thanks <@${vote.user}> for [voting for Clash Commander on Top.gg](https://top.gg/bot/1057995097167368222/vote)\n\n[Vote Now!](https://top.gg/bot/1057995097167368222/vote)\n\nVoting only takes 30 seconds and helps us keep making updates to Clash Commander!`,
-              color: 16724838,
-            },
-          ],
-          avatar_url: userdata.avatarURL || null,
-          username: `${userdata.tag}`,
-        },
-      }).then((data) => {
-        return data;
-      });
-    }),
-  );
+		app.listen(client.config.apiPorts.topGGPort);
+		console.log(`[DEBUG] TopGG API Online -> Port: ${client.config.apiPorts.topGGPort}`)
+	}
 
-  app.listen(65535);
+	startAPI();
 }
-startAPI();
