@@ -2,7 +2,7 @@ module.exports = {
     basicInformation: {
         botDevelopers: ["347077478726238228", "527953295407317014", "373209486296350730"], // Array of bot developers id's.
 
-        currentMode: "DEVELOPMENT", // DEVELOPMENT || PRODUCTION
+        currentMode: "PRODUCTION", // DEVELOPMENT || PRODUCTION
         mainGuildID: "1126989138340622406", // The main guild for the discord bot, could be support server.
 
         footerName: "Clash Commander" // The name to display on all of the embed footers.
