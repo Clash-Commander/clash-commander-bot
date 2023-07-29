@@ -19,6 +19,7 @@ module.exports = {
         supportServer: "https://discord.gg/WY3zcccp3g", // The discord support server link.
 
         japiRestAPI: "https://japi.rest/discord/v1", // The japiRestAPI link, recommended to keep as default.
+topGGApi: "https://top.gg/api", // The Top.gg API link, recommended to keep as default.
         cocAPI: "https://api.clashofclans.com/v1", // The COC API link, recommended to keep as default.
         cocStats: "https://www.clashofstats.com", // The COC Stats link, recommended to keep as default.
 
