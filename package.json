@@ -3,6 +3,10 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Clash-Commander/clash-commander-bot.git"
+  },
   "dependencies": {
     "@discordjs/rest": "^1.7.1",
     "@napi-rs/canvas": "^0.1.41",
