@@ -19,4 +19,9 @@ const clashComponents = async () => {
   require("./util/clashClient")(client);
 };
 
+const mongodb = async () => {
+  require("./util/mongo")();
+};
+
 clashComponents();
+mongodb();
