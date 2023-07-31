@@ -1,0 +1,28 @@
+version: '3.1'
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    container_name: mongo
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
+        MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+        MONGO_INITDB_DATABASE: ${MONGODB_DATABASE}
+    ports:
+      - ${MONGODB_PORT}:${MONGODB_PORT}
+    volumes:
+        - ./data/mongo:/data/db
+        - ./data/mongo/config:/data/config
+        - ./data/mongo/logs:/data/logs
+
+  cc-bot:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    container_name: cc-bot
+    restart: always
+    ports:
+      - 8221:8221
+    env_file:
+      - ./.env
