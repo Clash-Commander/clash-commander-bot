@@ -1,51 +1,66 @@
 const { readdirSync } = require("fs");
 const { ChalkAdvanced } = require("chalk-advanced");
+require("dotenv").config();
 const axios = require("axios");
 
 module.exports = async (client) => {
-	const commandFiles = readdirSync("../src/commands/").filter((file) => file.endsWith(".js"));
-	const commands = [];
+  const commandFiles = readdirSync("./src/commands/").filter((file) =>
+    file.endsWith(".js"),
+  );
 
-	for (const file of commandFiles) {
-		const command = require(`../commands/${file}`);
-		commands.push(command);
-		client.commands.set(command.name, command);
-	}
+  const commands = [];
 
-	if (client.config.basicInformation.currentMode.toLowerCase() === "production") {
-		client.setAppCommands(commands).catch((err) => { console.log(err) });
-		console.log(`${ChalkAdvanced.white("Clash Commander")} ${ChalkAdvanced.gray(">",)} ${ChalkAdvanced.green("Successfully registered commands globally.")}`);
+  for (const file of commandFiles) {
+    const command = require(`../commands/${file}`);
+    commands.push(command);
+    client.commands.set(command.name, command);
+  }
 
-		async function postStats() {
-			let serverCount = null;
-			await axios({
-				method: "GET",
-				url: `${client.config.links.japiRestAPI}/application/${process.env.MAIN_APPLICATION_ID}`,
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-			}).then((res) => { serverCount = res.data.data.bot.approximate_guild_count; }).catch((err) => { console.log(err) });
+  if (process.env.STATUS === "PRODUCTION") {
+    client.setAppCommands(commands).catch(console.log);
 
-			await axios({
-				method: "POST",
-				url: `${client.config.links.topGGApi}/bots/${process.env.MAIN_APPLICATION_ID}/stats`,
-				headers: {
-					Authorization: process.env.TOP_GG,
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-				data: {
-					server_count: serverCount,
-					shard_count: 1,
-				},
-			}).catch((err) => { console.log(err) });
-		}
+    // eslint-disable-next-line no-inner-declarations
+    async function postStats() {
+      try {
+        let servercount = null;
+        await axios({
+          method: "GET",
+          url: `https://japi.rest/discord/v1/application/1057995097167368222`,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }).then((res) => {
+          servercount = res.data.data.bot.approximate_guild_count;
+        });
 
-		postStats();
-		setInterval(postStats, 3600000);
-	} else {
-		client.setGuildCommands(commands, client.config.basicInformation.mainGuildID).catch((err) => { console.log(err) });
-		console.log(`${ChalkAdvanced.white("Clash Commander")} ${ChalkAdvanced.gray(">",)} ${ChalkAdvanced.green("Successfully registered commands locally.")}`);
-	}
+        await axios({
+          method: "post",
+          url: `https://top.gg/api/bots/1057995097167368222/stats`,
+          headers: {
+            Authorization: process.env.TOPGG,
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          data: {
+            server_count: servercount,
+            shard_count: 1,
+          },
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    postStats();
+
+    setInterval(postStats, 3600000);
+  } else {
+    client.setGuildCommands(commands, process.env.GUILD_ID).catch(console.log);
+
+    console.log(
+      `${ChalkAdvanced.white("Clash Commander")} ${ChalkAdvanced.gray(
+        ">",
+      )} ${ChalkAdvanced.green("Successfully registered commands locally")}`,
+    );
+  }
 };
