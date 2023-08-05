@@ -66,7 +66,7 @@ module.exports = {
 					.setTitle(`${emoji} ${cocData.name} ${cocData.tag}`)
 					.setURL(`${client.config.links.cocStats}/players/-${string}/summary`)
 					.setColor(client.config.colours.main)
-					.setFooter(client.config.basicInformation.footerName, client.avatarURL)
+					.setFooter(client.config.basicInformation.footerName, client.user.avatarURL)
 					.addFields([
 						{
 							name: "Townhall Level",
@@ -176,7 +176,7 @@ module.exports = {
 			const errorEmbed = new Embed()
 				.setTitle("Error")
 				.setColor(client.config.colours.red)
-				.setFooter(client.config.basicInformation.footerName, client.avatarURL)
+				.setFooter(client.config.basicInformation.footerName, client.user.avatarURL)
 				.setDescription(`The player tag provided was invalid! You can use [Clash of Stats](${client.config.links.cocStats}) to find your player tag or check in game.`);
 
 			return await interaction

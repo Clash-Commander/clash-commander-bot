@@ -49,7 +49,7 @@ module.exports = {
 					.setColor(colourEmbed)
 					.setThumbnail(cocData.badgeUrls.large)
 					.setDescription(`> ${cocData.description}`)
-					.setFooter(client.config.basicInformation.footerName, client.avatarURL)
+					.setFooter(client.config.basicInformation.footerName, client.user.avatarURL)
 					.addFields([
 						{
 							name: "Clan Level",
@@ -118,7 +118,7 @@ module.exports = {
 				const errorEmbed = new Embed()
 					.setTitle("Error")
 					.setColor(client.config.colours.red)
-					.setFooter(client.config.basicInformation.footerName, client.avatarURL)
+					.setFooter(client.config.basicInformation.footerName, client.user.avatarURL)
 					.setDescription(`The clan tag provided was invalid! You can use [Clash of Stats](${client.config.links.cocStats}) to find your clan tag or check in game.`);
 
 				return interaction

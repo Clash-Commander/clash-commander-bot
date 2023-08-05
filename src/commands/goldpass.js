@@ -48,7 +48,7 @@ module.exports = {
 				let clashEmbed = new Embed()
 					.setTitle("**__Gold Pass:__**")
 					.setColor(client.config.colours.gold)
-					.setFooter(client.config.basicInformation.footerName, client.avatarURL)
+					.setFooter(client.config.basicInformation.footerName, client.user.avatarURL)
 					.setThumbnail(client.config.links.goldPassImage)
 					.setDescription(`> The gold pass includes:\n\n**Hero Skins** - 1 skin per month \n \n **1 Gem Donations** - Quick donate troops at the cost of 1 Gem per troop.\n \n **Builder Boost** - Buildings and Heroes require fewer resources and less time to build and upgrade.\n \n **Research Boost** - Troop, Spell, and Siege Machine upgrades in the Laboratory cost fewer resources and take less time to finish.\n \n **Training Boost** - Training troops, spells, and Siege Machines take less time to train. Heroes take less time to heal.\n \n **Upgrade levels** to Season Bank - With Gold Pass Season Bank can be upgraded to hold 25 Million Gold, 25 Million Elixir, and 250k Dark Elixir.\n \n Unlock next reward tiers with Gems`)
 					.addFields([
@@ -73,7 +73,7 @@ module.exports = {
 			let errorEmbed = new Embed()
 				.setTitle("Error")
 				.setColor(client.config.colours.red)
-				.setFooter(client.config.basicInformation.footerName, client.avatarURL)
+				.setFooter(client.config.basicInformation.footerName, client.user.avatarURL)
 				.setDescription(`${err}`);
 
 			return await interaction.editReply({ embeds: [errorEmbed] }).catch(() => { });
