@@ -15,8 +15,7 @@ const client = new Application({
 	port: config.apiPorts.applicationPort,
 });
 
-const fetchUserAvatar = () => { return axios.get(`${config.links.japiRestAPI}/user/${process.env.APPLICATION_ID}`).then((res) => res.data.data.avatarURL).catch(() => { }); };
-fetchUserAvatar().then((avatarURL) => { if (avatarURL) { client.avatarURL = avatarURL; } });
+client.fetchClient();
 
 client.config = config;
 client.on("debug", (debug) => console.log(debug));

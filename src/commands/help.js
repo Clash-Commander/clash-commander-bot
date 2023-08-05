@@ -19,8 +19,8 @@ module.exports = {
 			.setTitle("**__Clash Commander__**")
 			.setColor(client.config.colours.main)
 			.setDescription(`**Bot Created By:** ${client.config.basicInformation.botDevelopers.reduce((acc, id, index, arr) => acc + `<@${id}>${index < arr.length - 1 ? (index === arr.length - 2 ? ' and ' : ', ') : ''}`, '')}.\n> A bot that displays information about Clash of Clans.\n\n ** __Commands: __ ** `)
-			.setThumbnail(client.avatarURL)
-			.setFooter(client.config.basicInformation.footerName, client.avatarURL)
+			.setThumbnail(client.user.avatarURL)
+			.setFooter(client.config.basicInformation.footerName, client.user.avatarURL)
 			.addFields([
 				{
 					name: "</clan:1058162162465517649>",
